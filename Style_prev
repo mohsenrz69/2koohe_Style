@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مقایسه سبک‌های ظاهری سامانه</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    background: #e9eef3;
+    padding: 30px 18px 60px;
+    color: #0f172a;
+  }
+  .page-title { text-align: center; font-size: 26px; font-weight: 900; margin-bottom: 8px; }
+  .page-sub { text-align: center; color: #64748b; font-size: 14px; margin-bottom: 36px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px){ .grid { grid-template-columns: 1fr; } }
+
+  .style-wrap {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(15,23,42,0.12);
+    border: 1px solid rgba(15,23,42,0.08);
+  }
+  .style-tag {
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .demo { padding: 24px; }
+
+  /* عناصر مشترک نمونه */
+  .demo-h { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
+  .demo-sub { font-size: 13px; margin-bottom: 18px; }
+  .kpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 18px; }
+  .kpi { padding: 16px 14px; border-radius: 14px; }
+  .kpi-l { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+  .kpi-n { font-size: 26px; font-weight: 900; line-height: 1; }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn { padding: 9px 18px; border-radius: 12px; font-size: 13px; font-weight: 800; border: none; cursor: default; }
+  .tbl { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+  .tbl th, .tbl td { padding: 10px 12px; text-align: right; }
+  .chip { display:inline-block; padding: 3px 11px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+
+  /* ===== ۱: مدل اول ===== */
+  .s1 .style-tag { background: #475569; }
+  .s1 .demo { background: #ffffff; }
+  .s1 .demo-h { color: #1e293b; }
+  .s1 .demo-sub { color: #94a3b8; }
+  .s1 .kpi { background: #f8fafc; border: 1px solid #e2e8f0; }
+  .s1 .kpi-l { color: #64748b; }
+  .s1 .kpi-n { color: #1e293b; }
+  .s1 .btn-primary { background: #334155; color: #fff; }
+  .s1 .btn-soft { background: #f1f5f9; color: #475569; }
+  .s1 .tbl th { color: #94a3b8; border-bottom: 2px solid #e2e8f0; font-weight: 700; }
+  .s1 .tbl td { border-bottom: 1px solid #f1f5f9; }
+  .s1 .chip { background: #f1f5f9; color: #475569; }
+
+  /* ===== ۲: مدل دوم===== */
+  .s2 .style-tag { background: linear-gradient(135deg,#0f766e,#0d9488); }
+  .s2 .demo { background: linear-gradient(180deg,#f0fdfa,#ffffff); }
+  .s2 .demo-h { color: #0f766e; }
+  .s2 .demo-sub { color: #5b8c87; }
+  .s2 .kpi { background: #fff; border: 1.5px solid rgba(13,148,136,0.22); box-shadow: 0 4px 12px rgba(13,148,136,0.07); }
+  .s2 .kpi-l { color: #0f766e; }
+  .s2 .kpi-n { color: #134e4a; }
+  .s2 .kpi.green .kpi-n { color: #059669; }
+  .s2 .kpi.amber .kpi-n { color: #d97706; }
+  .s2 .btn-primary { background: linear-gradient(135deg,#0d9488,#0f766e); color: #fff; }
+  .s2 .btn-soft { background: #ccfbf1; color: #0f766e; }
+  .s2 .tbl th { color: #0f766e; border-bottom: 2px solid rgba(13,148,136,0.25); }
+  .s2 .tbl td { border-bottom: 1px solid rgba(13,148,136,0.10); }
+  .s2 .chip { background: rgba(13,148,136,0.12); color: #0f766e; }
+
+  /* ===== ۳: مدل سوم ===== */
+  .s3 .style-tag { background: #1e293b; }
+  .s3 .demo { background: #0f172a; }
+  .s3 .demo-h { color: #f1f5f9; }
+  .s3 .demo-sub { color: #94a3b8; }
+  .s3 .kpi { background: #1e293b; border: 1px solid #334155; }
+  .s3 .kpi-l { color: #94a3b8; }
+  .s3 .kpi-n { color: #5eead4; }
+  .s3 .kpi.v2 .kpi-n { color: #818cf8; }
+  .s3 .kpi.v3 .kpi-n { color: #fbbf24; }
+  .s3 .btn-primary { background: #14b8a6; color: #042f2e; }
+  .s3 .btn-soft { background: #334155; color: #e2e8f0; }
+  .s3 .tbl th { color: #94a3b8; border-bottom: 2px solid #334155; }
+  .s3 .tbl td { border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+  .s3 .chip { background: rgba(20,184,166,0.18); color: #5eead4; }
+
+  /* ===== ۴: مدل چهارم ===== */
+  .s4 .style-tag { background: linear-gradient(135deg,#4f46e5,#6d28d9); }
+  .s4 .demo { background: linear-gradient(180deg,#fbfdff,#f4f7fb); }
+  .s4 .demo-h { color: #0f172a; }
+  .s4 .demo-sub { color: #64748b; }
+  .s4 .kpi { background: #fff; border: 1px solid rgba(15,23,42,0.08); box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+  .s4 .kpi-l { color: #64748b; }
+  .s4 .kpi-n { color: #0f172a; }
+  .s4 .kpi.green .kpi-n { color: #059669; }
+  .s4 .kpi.blue .kpi-n { color: #2563eb; }
+  .s4 .btn-primary { background: linear-gradient(135deg,#14b8a6,#0ea5a4); color: #fff; }
+  .s4 .btn-soft { background: #eef2ff; color: #4f46e5; }
+  .s4 .tbl th { color: #64748b; border-bottom: 2px solid #e2e8f0; }
+  .s4 .tbl td { border-bottom: 1px solid #f1f5f9; }
+  .s4 .chip { background: rgba(79,70,229,0.10); color: #4f46e5; }
+</style>
+</head>
+<body>
+  <div class="page-title">مقایسه چهار سبک ظاهری سامانه</div>
+  <div class="page-sub">مدل های پیشنهادی سامانه به شرح زیر هستند</div>
+
+  <div class="grid">
+
+    <!-- 1 -->
+    <div class="style-wrap s1">
+      <div class="style-tag">۱ — مدل اول</div>
+      <div class="demo">
+        <div class="demo-h">کارتابل مدیر گروه</div>
+        <div class="demo-sub">وضعیت امروز گروه فدائیان</div>
+        <div class="kpis">
+          <div class="kpi"><div class="kpi-l">افراد گروه</div><div class="kpi-n">۳</div></div>
+          <div class="kpi"><div class="kpi-l">حاضرین</div><div class="kpi-n">۳</div></div>
+          <div class="kpi"><div class="kpi-l">غایبین</div><div class="kpi-n">۰</div></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary">ثبت حضور</button>
+          <button class="btn btn-soft">مشاهده</button>
+        </div>
+        <table class="tbl">
+          <tr><th>گروه</th><th>محل خدمت</th><th>وضعیت</th></tr>
+          <tr><td>فدائیان</td><td><span class="chip">شهدا</span></td><td>حاضر</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="style-wrap s2">
+      <div class="style-tag">۲ — مدل دوم</div>
+      <div class="demo">
+        <div class="demo-h">کارتابل مدیر گروه</div>
+        <div class="demo-sub">وضعیت امروز گروه فدائیان</div>
+        <div class="kpis">
+          <div class="kpi"><div class="kpi-l">افراد گروه</div><div class="kpi-n">۳</div></div>
+          <div class="kpi green"><div class="kpi-l">حاضرین</div><div class="kpi-n">۳</div></div>
+          <div class="kpi amber"><div class="kpi-l">غایبین</div><div class="kpi-n">۰</div></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary">ثبت حضور</button>
+          <button class="btn btn-soft">مشاهده</button>
+        </div>
+        <table class="tbl">
+          <tr><th>گروه</th><th>محل خدمت</th><th>وضعیت</th></tr>
+          <tr><td>فدائیان</td><td><span class="chip">شهدا</span></td><td>حاضر</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="style-wrap s3">
+      <div class="style-tag">۳ — مدل سوم</div>
+      <div class="demo">
+        <div class="demo-h">کارتابل مدیر گروه</div>
+        <div class="demo-sub">وضعیت امروز گروه فدائیان</div>
+        <div class="kpis">
+          <div class="kpi"><div class="kpi-l">افراد گروه</div><div class="kpi-n">۳</div></div>
+          <div class="kpi v2"><div class="kpi-l">حاضرین</div><div class="kpi-n">۳</div></div>
+          <div class="kpi v3"><div class="kpi-l">غایبین</div><div class="kpi-n">۰</div></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary">ثبت حضور</button>
+          <button class="btn btn-soft">مشاهده</button>
+        </div>
+        <table class="tbl">
+          <tr><th>گروه</th><th>محل خدمت</th><th>وضعیت</th></tr>
+          <tr><td>فدائیان</td><td><span class="chip">شهدا</span></td><td>حاضر</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="style-wrap s4">
+      <div class="style-tag">۴ — مدل چهارم</div>
+      <div class="demo">
+        <div class="demo-h">کارتابل مدیر گروه</div>
+        <div class="demo-sub">وضعیت امروز گروه فدائیان</div>
+        <div class="kpis">
+          <div class="kpi"><div class="kpi-l">افراد گروه</div><div class="kpi-n">۳</div></div>
+          <div class="kpi green"><div class="kpi-l">حاضرین</div><div class="kpi-n">۳</div></div>
+          <div class="kpi blue"><div class="kpi-l">غایبین</div><div class="kpi-n">۰</div></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary">ثبت حضور</button>
+          <button class="btn btn-soft">مشاهده</button>
+        </div>
+        <table class="tbl">
+          <tr><th>گروه</th><th>محل خدمت</th><th>وضعیت</th></tr>
+          <tr><td>فدائیان</td><td><span class="chip">شهدا</span></td><td>حاضر</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
